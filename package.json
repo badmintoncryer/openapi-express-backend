@@ -9,7 +9,9 @@
     "gen-api": "openapi-ts -i ./src/openapi.yaml -o ./src/api.ts -c @hey-api/client-fetch",
     "format": "npx @biomejs/biome format --write .",
     "lint": "npx @biomejs/biome lint --write .",
-    "biome": "npm run format && npm run lint"
+    "biome": "npm run format && npm run lint",
+    "build": "npx tsc",
+    "start": "cp ./src/openapi.yaml ./dist/ && node ./dist/index.js"
   },
   "keywords": [],
   "author": "",

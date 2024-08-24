@@ -10,6 +10,7 @@ paths:
   /:
     get:
       summary: Returns a test message
+      operationId: test
       x-eov-operation-id: test
       responses:
         '200':
