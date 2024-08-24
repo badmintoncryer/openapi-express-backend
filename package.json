@@ -5,7 +5,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gen-api": "openapi-ts -i ./src/openapi.yaml -o ./src/api.ts -c @hey-api/client-fetch"
   },
   "keywords": [],
   "author": "",
