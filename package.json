@@ -6,12 +6,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "gen-api": "openapi-ts -i ./src/openapi.yaml -o ./src/api.ts -c @hey-api/client-fetch"
+    "gen-api": "openapi-ts -i ./src/openapi.yaml -o ./src/api.ts -c @hey-api/client-fetch",
+    "format": "npx @biomejs/biome format --write .",
+    "lint": "npx @biomejs/biome lint --write .",
+    "biome": "npm run format && npm run lint"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@biomejs/biome": "1.8.3",
     "@hey-api/openapi-ts": "^0.52.9",
     "@types/express": "^4.17.21",
     "@types/node": "^22.5.0",
