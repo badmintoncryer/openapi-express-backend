@@ -45,7 +45,7 @@ app.use(express.text());
 app.use(express.urlencoded({ extended: false }));
 
 // define api
-app.get("/a", (req: express.Request, res: express.Response) => {
+app.get("/", (_req: express.Request, res: express.Response) => {
   res.send({
     message: "test",
   });
