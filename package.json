@@ -11,11 +11,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@hey-api/openapi-ts": "^0.52.9",
     "@types/express": "^4.17.21",
     "@types/node": "^22.5.0",
     "typescript": "^5.5.4"
   },
   "dependencies": {
+    "@hey-api/client-fetch": "^0.2.4",
     "express": "^4.19.2",
     "express-openapi-validator": "^5.3.1"
   }
