@@ -4,13 +4,20 @@ import express, {
   type Response,
 } from "express";
 import * as OpenApiValidator from "express-openapi-validator";
-import { RouteMetadata } from "express-openapi-validator/dist/framework/openapi.spec.loader";
-import { OpenAPIV3 } from "express-openapi-validator/dist/framework/types";
+import type { RouteMetadata } from "express-openapi-validator/dist/framework/openapi.spec.loader";
+import type { OpenAPIV3 } from "express-openapi-validator/dist/framework/types";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { GetResponse } from "./api.ts";
 
-type HttpMethods = "get" | "put" | "post" | "delete" | "options" | "head" | "patch" | "trace";
+type HttpMethods =
+  | "get"
+  | "put"
+  | "post"
+  | "delete"
+  | "options"
+  | "head"
+  | "patch"
+  | "trace";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -37,7 +44,7 @@ app.use(
       resolver: (
         _: string,
         route: RouteMetadata,
-        apiDoc: OpenAPIV3.Document
+        apiDoc: OpenAPIV3.Document,
       ) => {
         const pathKey = route.openApiRoute.slice(route.basePath.length);
         const schema =
@@ -48,7 +55,7 @@ app.use(
         const operationId = schema.operationId;
         if (!operationId) {
           throw new Error(
-            `operationId is not defined on ${route.method} ${pathKey}`
+            `operationId is not defined on ${route.method} ${pathKey}`,
           );
         }
         const handle = handlers[operationId];
@@ -58,7 +65,7 @@ app.use(
         return handle;
       },
     },
-  })
+  }),
 );
 
 // error handler
@@ -68,13 +75,13 @@ app.use(
     err: Error & { status: number; errors: any },
     _req: Request,
     res: Response,
-    _next: NextFunction
+    _next: NextFunction,
   ) => {
     res.status(err.status || 500).json({
       message: err.message,
       errors: err.errors,
     });
-  }
+  },
 );
 
 const testHandler = async (_req: express.Request, res: express.Response) => {
@@ -83,7 +90,10 @@ const testHandler = async (_req: express.Request, res: express.Response) => {
   });
 };
 
-const handlers: Record<string, (req: express.Request, res: express.Response) => object> = {
+const handlers: Record<
+  string,
+  (req: express.Request, res: express.Response) => object
+> = {
   test: testHandler,
 };
 
