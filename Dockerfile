@@ -7,6 +7,7 @@ RUN npm install
 # build the application
 COPY . .
 RUN npx tsc
+COPY ./src/openapi.yaml ./dist/openapi.yaml
 
 # Stage 2: Run the application
 FROM node:20.17.0-slim
