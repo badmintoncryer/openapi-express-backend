@@ -8,6 +8,7 @@ import { RouteMetadata } from "express-openapi-validator/dist/framework/openapi.
 import { OpenAPIV3 } from "express-openapi-validator/dist/framework/types";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { GetResponse } from "./api.ts";
 
 type HttpMethods = "get" | "put" | "post" | "delete" | "options" | "head" | "patch" | "trace";
 
@@ -17,6 +18,13 @@ const __dirname = path.dirname(__filename);
 const apiSpec = path.join(__dirname, "openapi.yaml");
 
 const app: express.Express = express();
+
+// configure express to parse json and urlencoded request bodies
+app.use(express.json());
+app.use(express.text());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.raw());
+
 // configure the api validator
 app.use(
   OpenApiValidator.middleware({
@@ -68,10 +76,6 @@ app.use(
     });
   }
 );
-
-app.use(express.json());
-app.use(express.text());
-app.use(express.urlencoded({ extended: false }));
 
 const testHandler = async (_req: express.Request, res: express.Response) => {
   res.send({
